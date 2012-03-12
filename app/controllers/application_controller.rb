@@ -27,7 +27,8 @@ class ApplicationController < ActionController::Base
   
   def store_sequence(hash)
      ans = {}
-     ans[:sequenceName] = hash["gameName"]
+     ans[:gameName] = hash["gameName"]
+     ans[:sequenceName] = hash["sequenceName"]     
      ans[:levels] = []
      i = 1
      while hash.has_key? 'level'+i.to_s
