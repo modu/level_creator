@@ -14,8 +14,9 @@ module GameConfigurationsHelper
             end  
             html << "#{content_tag :label, elem["name"].to_s}"
             html << "#{select_tag elem["name"].to_s,(option.html_safe) } <br><br />"
+            
         end           #end of case statement
-      end             #end of each.do 
+      end             #end of each.do       
       return html
   end
   
@@ -23,7 +24,9 @@ module GameConfigurationsHelper
       html = ''
       ary.each_index do |i|
         div = ary[i]
+        html << "<hr style=\"background-color:#000000;height:2px\"/>"
         html << "<div id=\"#{i.to_s+'d'+1.to_s}\" class=\"#{'c'+i.to_s}\" >"
+        html << "<hr/>"
         div.each do |elem|
           case elem["type"]
              when :textBox

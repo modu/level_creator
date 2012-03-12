@@ -98,6 +98,11 @@
 		}
 
 
+		$("#gameName").live("change",function(){
+			var temp = $("#gameName").val();
+		$(":regex(id,elementName.*)").attr('value',$("#gameName").val() );
+		});
+
 });		
 		
 </script>

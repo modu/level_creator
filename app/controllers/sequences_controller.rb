@@ -13,7 +13,7 @@ class SequencesController < ApplicationController
   def xml
     sn = params[:sequenceName]
     seqOb = Sequence.all_of('sequenceName' => sn).first
-    binding.pry
+    #binding.pry
     render :xml => seqOb
   end
 end
