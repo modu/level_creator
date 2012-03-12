@@ -1,7 +1,26 @@
 LevelCreator::Application.routes.draw do
-  match 'created' => 'gameConfigurations#created'
+  match 'createGame', :to => 'gameConfigurations#createGame',   :via => :get
+  match 'created',    :to => 'gameConfigurations#created',      :via => :post
+  match 'createLevel/:gameName', :to => 'gameConfigurations#createLevel',  :via => :get
+  match 'createdLevel/:gameName', :to => 'Levels#created', :via => :post
+  match 'showLevel/:gameName/:levelName/xml', :to => 'Levels#xml', :via => :get
   
-  match 'createGame' => 'gameConfigurations#createGame'
+  #match 'mathfact/sequences/index',         :to => 'sequences#index' ,       :via => :get
+  match ':gameName/sequences/create',        :to => 'sequences#create',       :via => :get  # show the form for creating sequences
+  match ':gameName/sequences/created',       :to => 'sequences#created',      :via => :post  # receives and creates new sequences
+  #match 'mathfact/sequences/show',          :to => 'sequences#show',         :via => :get   # show existing sequences
+  #match 'mathfact/sequences/load/(:id)',            :to => 'sequences#load',         :via => :get   # show existing sequences
+  #match 'mathfact/sequences/load/updated',          :to => 'sequences#updated',      :via => :post   # receive and update sequences
+  match ':gameName/sequences/xml/:sequenceName',             :to => 'sequences#xml',          :via => :get   # show existing sequences
+
+
+  #match 'mathfact/sequences/index',         :to => 'sequences#index' ,       :via => :get
+  match ':gameName/experiments/create',        :to => 'experiments#create',       :via => :get  # show the form for creating sequences
+  match ':gameName/experiments/created',       :to => 'experiments#created',      :via => :post  # receives and creates new sequences
+  #match 'mathfact/experiments/show',          :to => 'sequences#show',         :via => :get   # show existing sequences
+  #match 'mathfact/experiments/load/(:id)',            :to => 'sequences#load',         :via => :get   # show existing sequences
+  #match 'mathfact/sequences/load/updated',          :to => 'sequences#updated',      :via => :post   # receive and update sequences
+  match ':gameName/experiments/xml/:sequenceName',             :to => 'experiments#xml',          :via => :get   # show existing sequences
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

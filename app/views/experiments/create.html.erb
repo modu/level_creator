@@ -1,0 +1,16 @@
+<form action="created" method="post">
+
+<%= label_TextField_helper 'Experiment Name', 'experimentName', 'enter Experiment\'s name ' %>
+
+</br></br></br>
+
+<div class="clone" id="cloneID1">
+<%= select 'sequence1',nil,@sequenceNames,{},{ :id => "sequence1"} %><br>
+</div>
+
+<input name="Add Experiment" value="Add Experiment" type="button" id="AddExperimentButton">
+<input name="Del Experiment" value="Del Experiment" type="button" id="DelExperimentButton">
+</br></br>
+<%= submit_tag 'Create Experiment'%>
+</form>
+</br>

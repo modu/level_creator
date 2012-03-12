@@ -613,7 +613,7 @@ label {
   font-size: 15px;
   line-height: 18px;
   float: left;
-  width: 200px;
+  width: 300px;
   text-align: left;
   color: #404040;
 }
@@ -672,7 +672,7 @@ input[type=button], input[type=reset], input[type=submit] {
   height: auto;
 }
 select, input[type=file] {
-  height: 20px;
+  /*height: 20px;*/
   *height: auto;
   line-height: 27px;
   *margin-top: 4px;

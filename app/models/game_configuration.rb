@@ -15,12 +15,14 @@ class GameConfiguration
            when 'multiple'
              repeat = :multiple
            when 'commaSeperatedMultiple'
-             repeat = :comma
+             repeat = :multiple
         end
         ans[:elements] << { :name => hash['elementName'+i.to_s], :type => type, :repeat => repeat }
+        puts i if type == :dropDown
+        ans[:elements][-1][:options] = hash['elementOptions'+i.to_s].split(',') if type == :dropDown
         i = i+1
      end
+     puts ans
      return ans
-  end
-  
+  end  
 end

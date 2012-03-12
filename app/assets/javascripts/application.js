@@ -23,10 +23,16 @@
 //= require jquery_ujs
 //= require_tree .
 $(function() {
+	$('#DelSequenceButton').attr('disabled',true)
+	$('#itembuttondelete').attr('disabled',true)
 	
-	$('#buttonadd').click(gen_add('clone', 'cloneId', ['elementName','elementInputType', 'elementRepeatability'], 'itembuttondelete') )
 	
-	$('#itembuttondelete').click(del_but('itemclone','item','itembuttonadd','itembuttondelete'));
+	$('#buttonadd').click(gen_add('clone', 'cloneId', ['elementName','elementInputType', 'elementRepeatability', 'elementOptions'], 'itembuttondelete') )
+
+	$('#itembuttondelete').click(del_but('itemclone','item','itembuttonadd','itembuttondelete'))
+
+	$('#AddSequenceButton').click(gen_add('clone','cloneID',['level'],'DelSequenceButton'))
+	$('#DelSequenceButton').click(del_but('clone','cloneID','AddSequenceButton','DelSequenceButton'))
 	
 	function gen_add(class_name, div_name, button_id, del_button_id) {
 		return function() {
@@ -44,7 +50,6 @@ $(function() {
         }
         } // end return function
 	}
-	
 	function del_but(class_name, div_name, add_button_id, del_button_id) {
 		return function() {
 			var num = $('.'+class_name).length;
@@ -84,7 +89,11 @@ $(function() {
 		}
 			
 		} //end of return function
-	}
+	}		//end of show_hide
 	
+	
+	
+
+
 });
 

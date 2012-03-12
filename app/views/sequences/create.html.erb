@@ -1,0 +1,17 @@
+<form action="created" method="post">
+
+<%= label_TextField_helper 'Sequence Name', 'sequenceName', 'enter sequence\'s name ' %>
+
+</br></br></br>
+
+<div class="clone" id="cloneID1">
+<%= select 'level1',nil,@levelNames,{},{ :id => "level1"} %><br>
+</div>
+
+<input name="Add Sequences" value="Add Sequence" type="button" id="AddSequenceButton">
+<input name="Del Sequences" value="Del Sequence" type="button" id="DelSequenceButton">
+</br></br>
+<%= submit_tag 'Create Sequence'%>
+</form>
+</br>
+

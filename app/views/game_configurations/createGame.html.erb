@@ -6,35 +6,101 @@
 	<title>createGame</title>
 </head>
 <body>
-	<form method="post"  action="/created" >
+	<form method="post"  action="created" >
 	  <label >Game Name </label>
 	  <input type="text" name="gameName" id="gameName" /> <br />
 		<div id=cloneId1   class= "clone" >
 			<hr>
 			<label> Element Name </label>
 			<input type="text" name="elementName1" id="elementName1" /><br />
-			
+						
 			<label> Element Input Type </label>
-			
-			<select id="elementInputType1" name="">
+			<select id="elementInputType1" name="elementInputType1">
 			  <option value="textBox">Text box</option>
 			  <option value="dropDown"> Drop Down</option>
 			</select>
-			<br />
- 			<label> Element repeatability </label>
+			</br><br>
+ 
+			<label> Element Repeatability </label>
 			<select id="elementRepeatability1" name="elementRepeatability1">
 			  <option value="single"> One Element</option>
 			  <option value="multiple"> Multiple Elements </option>
 			  <option value="commaSeperatedMultiple"> comma Seperated Multiple </option>
 			</select>
-			</br>
+			</br><br>
+
+			<label> Element Options </label>
+			<input type="text" name="elementOptions1" id="elementOptions1"> 
+			</br><br>
 		</div>
-		<hr>
+		<hr>		
 		<input type="button" id="buttonadd" value="Add Element" /> 
-		
-		<input type="submit" value="Submit" />
+		<input type="submit" id="submit"  value="Submit" />
 	</form>
-
-
 </body>
+
+<script>
+	$(document).ready(function(){
+	
+
+	$("#check").click(function(){
+		var state = $(':regex(id,elementOptions.*)').css("display");
+		if(state!="none"){
+		$(':regex(id, elementOptions.*)').hide();
+			}
+			else{
+				$(':regex(id,elementOptions.*)').show();
+			}
+	});
+	
+
+	jQuery.expr[':'].regex = function(elem, index, match) {
+	    var matchParams = match[3].split(','),
+	        validLabels = /^(data|css):/,
+	        attr = {
+	            method: matchParams[0].match(validLabels) ? 
+	                        matchParams[0].split(':')[0] : 'attr',
+	            property: matchParams.shift().replace(validLabels,'')
+	        },
+	        regexFlags = 'ig',
+	        regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g,''), regexFlags);
+	    return regex.test(jQuery(elem)[attr.method](attr.property));
+	}
+	
+
+	$("select:regex(id,elementInputType.*)").live("change",function(){
+		if($(this).val() == "dropDown"){
+			parentID = $(this).parent().attr('id');
+			$('#'+parentID).children(":regex(id,elementOptions.*)").show();
+			$('#'+parentID).children(":contains(Element Options)").show();			
+		}else if($(this).val() == "textBox"){
+			$('#'+parentID).children(":regex(id,elementOptions.*)").hide();
+			$('#'+parentID).children(":contains(Element Options)").hide();			
+		}
+	});
+	
+	$(':regex(id,cloneID.*)').children(":contains(Element Options)").hide();
+	$(':regex(id,cloneID.*)').children(":regex(id,elementOptions.*)").hide();
+	$("#submit").attr('disabled',true);
+	
+	
+    	$("input:regex(id,elementName.*)").live("change",function(){		
+		$("#submit").attr('disabled',false);
+		if( ( count( $(this).val() ,"\\.") ) > 4){
+			alert("cannot use more the 4 dots in textField Input! Please change");
+			$(this).attr("value",'');
+			$("#submit").attr('disabled',true);
+		}
+	});
+
+	    function count(s1, letter) {
+	    return s1.match( new RegExp(letter,'g') ).length;
+		}
+
+
+});		
+		
+</script>
 </html>
+
+

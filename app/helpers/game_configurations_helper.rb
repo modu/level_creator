@@ -1,87 +1,59 @@
 module GameConfigurationsHelper
-  $example_out1 = [{:name => 'angleAstroid.levelName', :type => :textBox},
-                  {:name => 'angleAstroid.gamePlayMode', :type => :dropDown, :options => [:Angle,:Time]},
-                  {:name => 'angleAstroid.background', :type => :dropDown, :options => [:bg1, :bg2, :bg3, :bg4]},
-                  {:name => 'angleAstroid.totaltrials', :type => :textBox}]
-
-  $example_out2 = [[{:name => 'angleAstroid.questions.question.angle', :type => :textBox},
-                   {:name => 'angleAstroid.questions.question.meteor', :type => :dropDown, :options => [:pinkmetor, :blackmeteor, :bluemeteor]},
-                   {:name => 'angleAstroid.questions.question.position', :type => :textBox}
-                  ],
-                  [{:name => 'angleAstroid.stones.stone.aftertime', :type => :textBox},
-                   {:name => 'angleAstroid.stones.stone.time', :type => :textBox},
-                   {:name => 'angleAstroid.stones.stone.center', :type => :textBox}
-                  ],
-                  [{:name => 'angleAstroid.kcs.kc.kcname', :type => :textBox},
-                   {:name => 'angleAstroid.kcs.kc.items.item', :type => :textBox},
-                  ]
-                 ]
-
+  def singleElements ary
+      html = ''
+      ary.each do |elem|
+        case elem["type"]
+           when :textBox
+            html << "#{content_tag :label, elem["name"]}"
+            html << "#{text_field_tag elem["name"],''}"
+            html << '<br><br />'
+           when :dropDown
+            option = ""
+            elem["options"].each do |t|
+              option << "#{content_tag :option, t.to_s} "
+            end  
+            html << "#{content_tag :label, elem["name"].to_s}"
+            html << "#{select_tag elem["name"].to_s,(option.html_safe) } <br><br />"
+        end           #end of case statement
+      end             #end of each.do 
+      return html
+  end
   
-
-
-  def render 
-    html = ""
-    $example_out1.each do |temp|
-      case temp[:type]
-      when :textBox
-        html << "</br>#{ 
-        content_tag :div , :class => "row" do
-          content_tag( :label, temp[:name])  +
-          text_field_tag( temp[:name],'') 
-        end
-        }"
-      when :dropDown
-        @option = ""
-        temp[:options].each do |t|
-          @option << "#{content_tag :option, t.to_s }"
-        end
-        html << "</br> #{content_tag :div, :class => "row" do
-                  content_tag( :label,  temp[:name].to_s ) +
-                  select_tag( temp[:name].to_s, (@option.html_safe))
-                  end } "
-      end
-    end
-    html.html_safe
-  end  #end of render function
-  
-  def anything
-    html = ''
-    
-    $example_out2.each do |j|
-      j.each do |k|
-        case k[:type]
-        when :textBox
-          @temp1 = "#{content_tag :div, :class => "span4" do
-             text_field_tag( k[:name], nil ,:placeholder => k[:name] )
-          end }"
-          @temp1 << "#{content_tag :div, :class => "span4" do
-              label_tag( nil, k[:name] )
-          end }"
-          html << "</br>#{ content_tag :div, :class => "row" do    
-          @temp1.html_safe  
-          end } "
-        when :dropDown
-          @option = ""
-          k[:options].each do |t|
-            @option << "#{content_tag :option, t.to_s }"
+  def multipleElements ary
+      html = ''
+      ary.each_index do |i|
+        div = ary[i]
+        html << "<div id=\"#{i.to_s+'d'+1.to_s}\" class=\"#{'c'+i.to_s}\" >"
+        div.each do |elem|
+          case elem["type"]
+             when :textBox
+               html << "<label>#{elem["name"]}</label>"
+               html << "<input type=\"text\" name=\"#{elem["name"]}1\" id=\"#{elem["name"]}1\" />"
+               html << '<br><br />'
+             when :dropDown
+               option = ""
+               elem["options"].each do |t|
+                 option << "#{content_tag :option, t.to_s} "
+               end  
+               html << "#{content_tag :label, elem["name"].to_s}"
+               html << "#{select_tag elem["name"].to_s+'1',option.html_safe } <br><br />"
           end
-          html << "</br> #{content_tag :div, :class => "row" do
-                    content_tag :div, :class => "span4" do
-                       content_tag( :label,  k[:name]  ) 
-                     end
-                    content_tag :div, :class => "span4" do 
-                      select_tag( k[:name], (@option.html_safe)) 
-                    end
-                    
-                  end
-                     } "
-          binding.pry          
         end
-                             
-      end        #end of inner each 
-    end          #end of outer each
-    html.html_safe
-  end #end of function
-    
+        html << "</div><br><br />"
+        html << "<input type=\"button\" id=\"b#{i}\" value=\"add\">"
+      end
+      return html
+  end
+  
+  def script ary
+    javascript = ''
+    #binding.pry
+    ary.each_index do |i|
+      str = ary[i].map { |x| '\'' + x["name"].gsub('.', '\\\\\\\\.') + '\'' }.join ','
+      javascript << '$("#b' + i.to_s + '").click(gen_add("' + 'c'+i.to_s+'","'+ i.to_s+'d' + '",[' + str + '], "nil"))'
+      javascript << ';'
+    end
+    javascript.html_safe
+  end
+  	
 end
