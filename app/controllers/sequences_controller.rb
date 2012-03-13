@@ -1,6 +1,7 @@
 class SequencesController < ApplicationController
   def create
     @gameName = params["gameName"]
+    binding.pry
     @levelNames = Level.where(@gameName+'.levelname'=>{"$exists"=>true}).to_a.map {|x| x[@gameName]["levelname"]}
   end
 
@@ -16,4 +17,9 @@ class SequencesController < ApplicationController
     #binding.pry
     render :xml => seqOb
   end
+  
+  def showSequences
+    
+  end
+  
 end

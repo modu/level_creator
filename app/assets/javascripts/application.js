@@ -33,6 +33,11 @@ $(function() {
 
 	$('#AddSequenceButton').click(gen_add('clone','cloneID',['level'],'DelSequenceButton'))
 	$('#DelSequenceButton').click(del_but('clone','cloneID','AddSequenceButton','DelSequenceButton'))
+	$('#AddExperimentButton').click(gen_add('clone','cloneID',['sequence'],'DelExperimentButton'))
+	$('#DelExperimentButton').click(del_but('clone','cloneID','AddExperimentButton','DelExperimentButton'))
+	
+	
+	
 	
 	function gen_add(class_name, div_name, button_id, del_button_id) {
 		return function() {

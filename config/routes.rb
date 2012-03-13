@@ -1,4 +1,5 @@
 LevelCreator::Application.routes.draw do
+  match 'showGames',  :to => 'gameConfigurations#showGames',    :via => :get
   match 'createGame', :to => 'gameConfigurations#createGame',   :via => :get
   match 'created',    :to => 'gameConfigurations#created',      :via => :post
   match 'createLevel/:gameName', :to => 'gameConfigurations#createLevel',  :via => :get
@@ -15,12 +16,12 @@ LevelCreator::Application.routes.draw do
 
 
   #match 'mathfact/sequences/index',         :to => 'sequences#index' ,       :via => :get
-  match ':gameName/experiments/create',        :to => 'experiments#create',       :via => :get  # show the form for creating sequences
-  match ':gameName/experiments/created',       :to => 'experiments#created',      :via => :post  # receives and creates new sequences
+  match ':gameName/experiments/create',        :to => 'experiments#create',       :via => :get  # show the form for creating experiments
+  match ':gameName/experiments/created',       :to => 'experiments#created',      :via => :post  # receives and creates new experiments
   #match 'mathfact/experiments/show',          :to => 'sequences#show',         :via => :get   # show existing sequences
   #match 'mathfact/experiments/load/(:id)',            :to => 'sequences#load',         :via => :get   # show existing sequences
   #match 'mathfact/sequences/load/updated',          :to => 'sequences#updated',      :via => :post   # receive and update sequences
-  match ':gameName/experiments/xml/:sequenceName',             :to => 'experiments#xml',          :via => :get   # show existing sequences
+  match ':gameName/experiments/xml/:experimentName',             :to => 'experiments#xml',          :via => :get   # show existing experiments
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

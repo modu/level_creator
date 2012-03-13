@@ -38,6 +38,19 @@ class ApplicationController < ActionController::Base
      return ans
   end
   
+  def store_experiment(hash)
+     ans = {}
+     ans[:gameName] = hash["gameName"]
+     ans[:experimentName] = hash["experimentName"]     
+     ans[:sequences] = []
+     i = 1
+     while hash.has_key? 'sequence'+i.to_s
+        ans[:sequences] << { :sequence => hash['sequence'+i.to_s] }
+        i = i+1
+     end
+     return ans
+  end  
+  
   def converter(hash)
      @ans1 = []
      @ans2 = []
