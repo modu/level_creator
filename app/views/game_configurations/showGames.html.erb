@@ -1,12 +1,32 @@
+<h1 style="color:black; font-family:arial;font-size:30px"> All Games </h1>
+<ul>
+<li><a style="color:green; font-family:arial; font-size:25px" href="/createGame"> Create New Game </a></li>	
+</ul>
 
-<html lang="en">
-<head>
-	<title>showGames.html</title>
-</head>
-<body>
-	<% @games.each do |x|%>
-	<%=	content_tag(:label, x)%>
-	</br>	</br>	
+	<ul>
+	<% @games.each_index do |t| %>
+		<div>
+		<label style="font-family:arial;color:red;font-size:20px;"><%= @games[t] %></label>
+		</div></br></br>
+		
+		<li style="font-family:arial;color:#B22222;font-size:15px;">Level </li>
+	<ul>
+		<li><a href="/showLevel/<%= @games[t] %>"> Show levels </a></li>	
+		<li><a href="/createLevel/<%= @games[t] %>"> Create levels </a></li>	
+	</ul>
+	
+	<li style="font-family:arial;color:#B22222;font-size:15px;">Sequence </li>
+	
+		<ul>
+		 <li><a href="/<%= @games[t] %>/sequences/show"> Show Sequences </a></li>	
+			<li><a href="/<%= @games[t] %>/sequences/create"> Create Sequences</a></li>	
+		</ul>
+	<li style="font-family:arial;color:#B22222;font-size:15px;">Experiment </li>
+	
+			<ul>
+			 <li><a href="/<%= @games[t] %>/experiments/show"> Show Experiments </a></li>	
+				<li><a href="/<%= @games[t] %>/experiments/create"> Create Experiments </a></li>	
+			</ul>	
+	</br></br>
 	<%end%>
-</body>
-</html>
+	</ul>

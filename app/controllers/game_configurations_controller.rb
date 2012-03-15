@@ -23,7 +23,7 @@ class GameConfigurationsController < ApplicationController
   end
   
   def showGames
-    binding.pry
+    
     @games = GameConfiguration.find(:all).to_a.map {|x| x["gameName"]}
     #query = GameConfiguration.all(:conditions => {:gameName => params["gameName"]})
   end

@@ -1,0 +1,10 @@
+<h1 > All sequences </h1 >
+	
+	
+	<label style="font-family:arial;color:red;font-size:20px;"><%= @gameName %></label>	</br></br>
+<ul>
+	<%@sequenceNames.each_index do |t|%>
+		<li><a href="/<%= @gameName %>/sequences/xml/<%= @sequenceNames[t] %>"> <%=@sequenceNames[t]%></a></li>
+		<%end%>		
+		</br></br>
+</ul>

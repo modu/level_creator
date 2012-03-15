@@ -1,15 +1,19 @@
 LevelCreator::Application.routes.draw do
   match 'showGames',  :to => 'gameConfigurations#showGames',    :via => :get
+  match '/showLevel/:gameName', :to => 'levels#show',      :via => :get
+  
   match 'createGame', :to => 'gameConfigurations#createGame',   :via => :get
   match 'created',    :to => 'gameConfigurations#created',      :via => :post
   match 'createLevel/:gameName', :to => 'gameConfigurations#createLevel',  :via => :get
   match 'createdLevel/:gameName', :to => 'Levels#created', :via => :post
   match 'showLevel/:gameName/:levelName/xml', :to => 'Levels#xml', :via => :get
   
+  
+  
   #match 'mathfact/sequences/index',         :to => 'sequences#index' ,       :via => :get
   match ':gameName/sequences/create',        :to => 'sequences#create',       :via => :get  # show the form for creating sequences
   match ':gameName/sequences/created',       :to => 'sequences#created',      :via => :post  # receives and creates new sequences
-  #match 'mathfact/sequences/show',          :to => 'sequences#show',         :via => :get   # show existing sequences
+  match ':gameName/sequences/show',          :to => 'sequences#show',         :via => :get   # show existing sequences
   #match 'mathfact/sequences/load/(:id)',            :to => 'sequences#load',         :via => :get   # show existing sequences
   #match 'mathfact/sequences/load/updated',          :to => 'sequences#updated',      :via => :post   # receive and update sequences
   match ':gameName/sequences/xml/:sequenceName',             :to => 'sequences#xml',          :via => :get   # show existing sequences
@@ -18,10 +22,13 @@ LevelCreator::Application.routes.draw do
   #match 'mathfact/sequences/index',         :to => 'sequences#index' ,       :via => :get
   match ':gameName/experiments/create',        :to => 'experiments#create',       :via => :get  # show the form for creating experiments
   match ':gameName/experiments/created',       :to => 'experiments#created',      :via => :post  # receives and creates new experiments
-  #match 'mathfact/experiments/show',          :to => 'sequences#show',         :via => :get   # show existing sequences
+  match ':gameName/experiments/show',          :to => 'experiments#show',         :via => :get   # show existing sequences
   #match 'mathfact/experiments/load/(:id)',            :to => 'sequences#load',         :via => :get   # show existing sequences
   #match 'mathfact/sequences/load/updated',          :to => 'sequences#updated',      :via => :post   # receive and update sequences
   match ':gameName/experiments/xml/:experimentName',             :to => 'experiments#xml',          :via => :get   # show existing experiments
+  
+  match ':gameName/experiments/:experimentName',            :to => 'experiments#ShowSequenceRandomXml', :via => :get
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
