@@ -5,15 +5,22 @@ class SequencesController < ApplicationController
   end
 
   def created
+    binding.pry
     ob = store_sequence params
     Sequence.create ob
   end
 
   def xml
-    sn = params[:sequenceName]
-    seqOb = Sequence.all_of('sequenceName' => sn).first
+    obj = {}
+    seqOb = Sequence.where('sequenceName' => params[:sequenceName]).to_a[0]
+    obj['gameName'] = seqOb['gameName']
+    obj['levels'] = seqOb['levels']
+    obj['sequenceName'] = seqOb['sequenceName']
+    out = create_xml(obj, '')
     #binding.pry
-    render :xml => seqOb
+    r = "<hash>"+out+"</hash>\n"
+    #binding.pry
+    render :xml => r
   end
   
   def show

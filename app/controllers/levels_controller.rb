@@ -4,12 +4,15 @@ class LevelsController < ApplicationController
   end
   
   def xml
-    
-    obj = Level.all(:conditions => {(params["gameName"]+'.levelname').to_sym => params["levelName"]}).to_a[0]
-    if obj == nil
-      obj = Level.all(:conditions => {(params["gameName"]+'.levelName').to_sym => params["levelName"]}).to_a[0]
+    obj = {}
+    obj[params['gameName']] = Level.where(params["gameName"]+'.levelname'=>params["levelName"]).to_a[0][params['gameName']]
+    if obj.length == 0
+      obj[params['gameName']] = Level.where(params["gameName"]+'.levelName'=>params["levelName"]).to_a[0][params['gameName']]
     end
-    render :xml => obj
+    
+    binding.pry
+    out = create_xml(obj, '')
+    render :text => out, :content_type => 'text/xml'
   end
   
   def show
@@ -18,7 +21,6 @@ class LevelsController < ApplicationController
     if @levelNames.length==0
       @levelNames = Level.where(@gameName+'.levelName'=>{"$exists"=>true}).to_a.map {|x| x[@gameName]["levelName"]}
     end
-
   end
 end
 

@@ -158,5 +158,31 @@ class ApplicationController < ActionController::Base
      return ans
   end
   
+  def create_xml(hash, space)
+     xml = ''
+     hash.each do |k,v|
+        if v.class == String
+           xml << space + "<#{k}>#{v}</#{k}>\n"
+        else
+           if v.class == Array
+              v.each do |ih|
+                unless ih.class == String
+                 xml << space + "<#{k}>\n"
+                 xml << create_xml(ih, space+'  ')
+                 xml << space + "</#{k}>\n"
+                else
+                  xml <<  space + "<#{k}>#{ih}</#{k}>\n"
+                end  
+              end
+           else
+              xml << space + "<#{k}>\n"
+              xml << create_xml(v, space+'  ')
+              xml << space + "</#{k}>\n"
+           end
+        end
+     end
+     return xml
+  end
+  
   
 end

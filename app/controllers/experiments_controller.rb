@@ -10,17 +10,22 @@ class ExperimentsController < ApplicationController
     Experiment.create ob    
   end
 
-  def xml
-    sn = params[:experimentName]
-    seqOb = Experiment.all_of('experimentName' => sn).first
-    
-    render :xml => seqOb
+  def xml    
+    obj = {}
+    expOb = Experiment.where('experiment' => params[:experimentName]).to_a[0]
+    obj['gameName'] = expOb['gameName']
+    obj['levels'] = expOb['levels']
+    obj['experimentName'] = expOb['experimentName']
+    out = create_xml(obj, '')
+    #binding.pry
+    r = "<hash>"+out+"</hash>\n"
+    #binding.pry
+    render :xml => r
   end
-  
+  #rabel
   def show
     @gameName = params[:gameName]
     @experimentName = Experiment.where(gameName:@gameName).to_a.map{|x| x["experimentName"]}
-    
   end
   
   def ShowSequenceRandomXml
