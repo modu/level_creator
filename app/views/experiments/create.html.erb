@@ -1,16 +1,26 @@
 <form action="created" method="post">
-
+</br></br>
 <%= label_TextField_helper 'Experiment Name', 'experimentName', 'enter Experiment\'s name ' %>
 
 </br></br></br>
 
 <div class="clone" id="cloneID1">
-<%= select 'sequence1',nil,@sequenceNames,{},{ :id => "sequence1"} %><br>
+<%= select 'sequence1',nil,@sequenceNames,{},{ :id => "sequence1"} %><br><br>
 </div>
 
 <input name="Add Experiment" value="Add Sequence" type="button" id="AddExperimentButton">
 <input name="Del Experiment" value="Del Sequence" type="button" id="DelExperimentButton">
 </br></br>
-<%= submit_tag 'Create Experiment'%>
+<%= submit_tag 'Create Experiment', :id => "SubmitButton"%>
 </form>
 </br>
+<script>
+ $(document).ready(function(){
+	$("#SubmitButton").click(function(e){
+		if($("#experimentName").val().length == 0){
+			e.preventDefault();
+			alert("Please Give Experiment Name!");
+		}
+	});
+});
+</script>

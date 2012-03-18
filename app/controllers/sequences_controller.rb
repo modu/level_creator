@@ -5,9 +5,9 @@ class SequencesController < ApplicationController
   end
 
   def created
-    binding.pry
     ob = store_sequence params
     Sequence.create ob
+    redirect_to "/showGames"
   end
 
   def xml
@@ -17,16 +17,13 @@ class SequencesController < ApplicationController
     obj['levels'] = seqOb['levels']
     obj['sequenceName'] = seqOb['sequenceName']
     out = create_xml(obj, '')
-    #binding.pry
     r = "<hash>"+out+"</hash>\n"
-    #binding.pry
     render :xml => r
   end
   
   def show
     @gameName = params[:gameName]
     @sequenceNames = Sequence.where(gameName:@gameName).to_a.map{|x| x["sequenceName"]}
-    
   end
   
 end
