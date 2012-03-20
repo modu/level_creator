@@ -1,6 +1,7 @@
 <h1 style="color:black; font-family:arial;font-size:30px"> All Games </h1>
 <ul>
 <li><a style="color:green; font-family:arial; font-size:25px" href="/createGame"> Create New Game </a></li>	
+
 </ul>
 
 	<ul>
@@ -8,6 +9,7 @@
 		<div>
 		<label style="font-family:arial;color:red;font-size:20px;"><%= @games[t] %></label>
 		</div></br></br>
+		<li style="font-family:arial;color:red;font-size:17px;"><a href="/delete/<%=@games[t]%>">  Delete Game </li>
 		
 		<li style="font-family:arial;color:#B22222;font-size:15px;">Level </li>
 	<ul>

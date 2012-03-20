@@ -65,6 +65,7 @@ class ApplicationController < ActionController::Base
            @ans1 << h
         else
            ary = e[:name].split('.')
+           binding.pry
            st = ary[0]+'.'+ary[1]+'.'+ary[2]
            found = false
            @ans2.each do |b|

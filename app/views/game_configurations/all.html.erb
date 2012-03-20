@@ -1,0 +1,23 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+
+<html lang="en">
+<head>
+	
+	<title>all.html</title>
+	</head>
+<body>
+	<h1> All Games </h1>
+	<form method="post" action="addToActiveGames">
+
+	<%= label_TextField_helper "Enter Game Name ", "AddGame", "Enter Game Name to add to active"   %>
+	<input type="submit" id="submit"  value="Add" />
+	</form>
+	
+ 	<% @games.each do |t|%>
+	<%= label_tag t %></br></br>
+	<% end%>
+	
+	
+</body>
+</html>
