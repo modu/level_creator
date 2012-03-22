@@ -1,0 +1,37 @@
+<form action="updated" method="post">
+</br></br>
+<%= label_tag 'New Experiment Name'%>
+<%= text_field_tag 'experimentName', @ExperimentName,:placeholder=> "enter New Experiment Name" %>
+
+<input type="hidden" name="gameName" value="<%=@gameName%>"/> 
+<input type="hidden" name="oldExperimentName" value="<%=@ExperimentName%>"/> 
+
+</br></br></br>
+
+<%@i.each_index do |t|%>
+<div class="clone" id=cloneID<%=t+1%> >
+<%= select 'sequence',nil,@sequenceNames, {:selected => @i[t]},{ :id => "sequence"+(t+1).to_s, :name => "sequence"+(t+1).to_s} %><br><br>
+</div>
+<%end%>
+
+
+<input name="Add Experiment" value="Add Experiment" type="button" id="AddExperimentButton">
+<input name="Del Experiment" value="Del Experiment" type="button" id="DelExperimentButton">
+</br></br>
+<%= submit_tag 'Update Experiment', :id => "SubmitButton"%>
+</form>
+</br>
+
+<script>
+	
+
+ $(document).ready(function(){
+	$("#SubmitButton").click(function(e){
+		if($("#experimentName").val().length == 0){
+			e.preventDefault();
+			alert("Please Give Experiment Name!");
+		}
+	});
+});
+
+</script>

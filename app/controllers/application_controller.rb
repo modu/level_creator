@@ -47,7 +47,7 @@ class ApplicationController < ActionController::Base
      ans[:sequences][:sequence] = []
      i = 1
      while hash.has_key? 'sequence'+i.to_s
-        ans[:sequences][:sequence] << { :sequence => hash['sequence'+i.to_s] }
+        ans[:sequences][:sequence] << hash['sequence'+i.to_s] 
         i = i+1
      end
      return ans

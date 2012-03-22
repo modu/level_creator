@@ -1,9 +1,6 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
-   "http://www.w3.org/TR/html4/strict.dtd">
-
-<html lang="en">
+<html >
 <head>
-	
+	<link rel="shortcut icon" href="/favicon.ico" />
 	<title>all.html</title>
 	</head>
 <body>
@@ -14,12 +11,12 @@
 	</form>
 	
  	<% @games.each do |t|%>
-	<label><%=t%> </label>
+	<label style="color:blue"><%=t%> </label>
 	</br></br>
 	<% end%>
 	
 	<a style="font-size:20px;"  href="/showGames">Back to Show Games  </a>
 	
-	
+
 </body>
 </html>

@@ -16,6 +16,7 @@ LevelCreator::Application.configure do
   # Don't care if the mailer can't send
   config.action_mailer.raise_delivery_errors = false
 
+
   # Print deprecation notices to the Rails logger
   config.active_support.deprecation = :log
 
@@ -31,6 +32,8 @@ LevelCreator::Application.configure do
 
   # Do not compress assets
   config.assets.compress = false
+  
+  config.serve_static_assets = true
 
   # Expands the lines which load the assets
   config.assets.debug = true

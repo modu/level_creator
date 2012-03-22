@@ -41,5 +41,26 @@ class SequencesController < ApplicationController
     
     render 'message'
   end
+  def update
+    @i = []
+    @gameName = params["gameName"]
+    @sequenceName = params["upSequenceName"]
+    @levelNames = Level.where(@gameName+'.levelname'=>{"$exists"=>true}).to_a.map {|x| x[@gameName]["levelname"]}
+    t = Sequence.where(gameName:@gameName,sequenceName:@sequenceName).to_a.map{|t| t["levels"]["level"]}
+    t[0].each do |x|
+      @i << x
+    end
+    binding.pry
+  end
+  
+  def updated
+    @gameName = params[:gameName]
+    @sequenceName = params[:oldSequenceName]
+    ob = store_sequence params
+    binding.pry
+    Sequence.where(gameName:@gameName,sequenceName:@sequenceName).update_all(ob)
+    
+    
+  end
   
 end

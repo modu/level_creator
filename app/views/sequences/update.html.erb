@@ -1,0 +1,37 @@
+<form action="updated" method="post">
+</br></br>
+<%= label_tag 'New Sequence Name'%>
+<%= text_field_tag 'sequenceName', @sequenceName,:placeholder=> "enter New sequence Name" %>
+
+<input type="hidden" name="gameName" value="<%=@gameName%>"/> 
+<input type="hidden" name="oldSequenceName" value="<%=@sequenceName%>"/> 
+
+</br></br></br>
+
+<%@i.each_index do |t|%>
+<div class="clone" id=cloneID<%=t+1%> >
+<%= select 'level' ,nil,@levelNames, {:selected => @i[t]},{ :id => "level"+(t+1).to_s, :name => "level"+(t+1).to_s} %><br><br>
+</div>
+<%end%>
+
+
+<input name="Add Sequences" value="Add Sequence" type="button" id="AddSequenceButton">
+<input name="Del Sequences" value="Del Sequence" type="button" id="DelSequenceButton">
+</br></br>
+<%= submit_tag 'Update Sequence', :id => "SubmitButton"%>
+</form>
+</br>
+
+<script>
+	
+
+ $(document).ready(function(){
+	$("#SubmitButton").click(function(e){
+		if($("#sequenceName").val().length == 0){
+			e.preventDefault();
+			alert("Please Give Sequence Name!");
+		}
+	});
+});
+
+</script>

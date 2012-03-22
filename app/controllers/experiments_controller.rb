@@ -7,6 +7,7 @@ class ExperimentsController < ApplicationController
 
   def created
     ob = store_experiment params
+    binding.pry
     Experiment.create ob    
     redirect_to "/showGames"
   end
@@ -41,6 +42,41 @@ class ExperimentsController < ApplicationController
     end
     
     #binding.pry
+  end
+  
+  def delete
+    @i = []
+    @gameName = params["gameName"]
+    @ExperimentName = params["delExperimentName"]
+    if( Experiment.where(gameName:@gameName,experimentName: @ExperimentName).to_a.empty? )
+      Experiment.where(gameName:@gameName,experimentName: @ExperimentName).to_a.delete_all
+      render 'delete'
+      return
+    end
+    render 'message'
+  end
+  def update
+    @i = []
+    @gameName = params["gameName"]
+    @ExperimentName = params["upExperimentName"]
+    @sequenceNames = Sequence.where(gameName:@gameName).to_a.map{|x| x["sequenceName"]}
+    t = Experiment.where(gameName:@gameName,experimentName:@ExperimentName).to_a.map{|t| t["sequences"]["sequence"]}
+    t[0].each do |x|
+      @i << x
+    end
+    
+  end
+  
+  def updated
+    @gameName = params[:gameName]
+    @experimentName = params[:oldExperimentName]
+    ob = store_experiment params
+    binding.pry
+    t = Experiment.where(gameName:@gameName,experimentName:@experimentName).update_all(ob)
+      if t==0
+        return false
+      end
+    render 'updated'  
   end
   
 end
