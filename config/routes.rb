@@ -9,8 +9,9 @@ LevelCreator::Application.routes.draw do
   match 'createLevel/:gameName', :to => 'gameConfigurations#createLevel',  :via => :get
   match 'createdLevel/:gameName', :to => 'Levels#created', :via => :post
   match 'showLevel/:gameName/:levelName/xml', :to => 'Levels#xml', :via => :get
-  match 'delete/:gameName',      :to => 'gameConfigurations#delete',       :via => :get
   
+  match 'delete/:gameName',      :to => 'gameConfigurations#delete',       :via => :get
+  match 'showLevel/delete',     :to => 'levels#delete',             :via => :post
   
   #match 'mathfact/sequences/index',         :to => 'sequences#index' ,       :via => :get
   match ':gameName/sequences/create',        :to => 'sequences#create',       :via => :get  # show the form for creating sequences
@@ -19,7 +20,7 @@ LevelCreator::Application.routes.draw do
   #match 'mathfact/sequences/load/(:id)',            :to => 'sequences#load',         :via => :get   # show existing sequences
   #match 'mathfact/sequences/load/updated',          :to => 'sequences#updated',      :via => :post   # receive and update sequences
   match ':gameName/sequences/xml/:sequenceName',             :to => 'sequences#xml',          :via => :get   # show existing sequences
-
+  match ':gameName/sequences/delete',                     :to => 'sequences#delete',      :via => :post
 
   #match 'mathfact/sequences/index',         :to => 'sequences#index' ,       :via => :get
   match ':gameName/experiments/create',        :to => 'experiments#create',       :via => :get  # show the form for creating experiments

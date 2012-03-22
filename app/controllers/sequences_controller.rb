@@ -5,6 +5,7 @@ class SequencesController < ApplicationController
   end
 
   def created
+    
     ob = store_sequence params
     Sequence.create ob
     redirect_to "/showGames"
@@ -24,6 +25,21 @@ class SequencesController < ApplicationController
   def show
     @gameName = params[:gameName]
     @sequenceNames = Sequence.where(gameName:@gameName).to_a.map{|x| x["sequenceName"]}
+  end 
+  
+  def delete
+    @i = []
+    @gameName = params["gameName"]
+    @SequenceName = params["delSequenceName"]
+    t = Experiment.where(gameName:@gameName,"sequences.sequence" => @SequenceName).to_a.map {|x| @i<<x["experimentName"]}    
+    if t.empty?
+      @t = Sequence.where(gameName:@gameName,sequenceName:@SequenceName).delete_all
+      binding.pry
+      render 'delete'
+      return
+    end
+    
+    render 'message'
   end
   
 end

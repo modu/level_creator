@@ -23,5 +23,19 @@ class LevelsController < ApplicationController
     end
   end
   
+  def delete
+    @i = []
+    @gameName = params["gameName"]
+    @LevelName = params["delLevelName"]
+    t = Sequence.where(gameName:@gameName,"levels.level" => @LevelName).to_a.map {|x| @i<<x["sequenceName"]}    
+    if t.empty?
+      Level.where(@gameName+".levelname"=>@LevelName).delete_all
+      render 'delete'
+      return
+    end
+    
+    render 'message'
+  end
+  
 end
 

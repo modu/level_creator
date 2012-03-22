@@ -2,7 +2,7 @@
 <%= @str0.html_safe %>
 <%= (singleElements @ans1).html_safe %>
 <%= (multipleElements @ans2).html_safe %>
-<input type="submit" value="Submit" />
+<input type="submit" value="Submit" id="SubmitButton" />
 </form>
 
 
@@ -27,6 +27,15 @@ function gen_add(class_name, div_name, button_id, del_button_id) {
       } }
       } // end return function
 }
+
+
+$("#SubmitButton").click(function(e){
+	if($("input:regex(id,levelname)").val().length == 0){
+		e.preventDefault();
+		alert("Please Also give LevelName!");
+	}
+});
+
 <%= @str3 %>
 
 });

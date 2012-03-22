@@ -9,14 +9,16 @@
 <body>
 	<h1> All Games </h1>
 	<form method="post" action="addToActiveGames">
-
 	<%= label_TextField_helper "Enter Game Name ", "AddGame", "Enter Game Name to add to active"   %>
 	<input type="submit" id="submit"  value="Add" />
 	</form>
 	
  	<% @games.each do |t|%>
-	<%= label_tag t %></br></br>
+	<label><%=t%> </label>
+	</br></br>
 	<% end%>
+	
+	<a style="font-size:20px;"  href="/showGames">Back to Show Games  </a>
 	
 	
 </body>

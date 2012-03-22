@@ -1,7 +1,38 @@
 <h1 > All Levels </h1 >
+	<form method="post" action="delete" >
+		<%= label_TextField_helper 'Enter Level Name to delete', 'delLevelName', 'Enter level Name here ' %>
+		<input type="hidden" name="gameName" value="<%=@gameName%>"/> 
+	<input type="submit" id="Delete"  value="Delete" />
+	</form>
+	
+	
 	<label style="font-family:arial;color:red;font-size:20px;"><%= @gameName %></label></br>	</br>	
+	
 	<%@levelNames.each_index do |t|%>
-		<li><a href="/showLevel/<%= @gameName %>/<%= @levelNames[t] %>/xml"> <%=@levelNames[t]%></a></li>	
+		<li><a href="/showLevel/<%= @gameName %>/<%= @levelNames[t] %>/xml"> <%=@levelNames[t]%></a>	</li>	
 		<%end%>
 		
-		 
+		<a style="font-size:20px;"  href="/showGames">Back to Show Games  </a>
+		
+	<script>
+	$(document).ready(function(){
+			$("#Delete").click(function(e){
+				str = $.trim($("a").text()).split(" ");
+				var truth = 0;
+				if(str.length == 0){  alert("There are no Sequences");}
+				for(i=0;i<str.length;i=i+1){
+					if(str[i]!== $("#delLevelName").val() ){
+						truth = truth +1;
+					}//end of if
+						
+				}//end of for
+				if(truth==str.length)
+				{
+					alert("Level Name not correct");
+					$("#delLevelName").attr("value","");
+					e.preventDefault();
+					return false;
+				}//end of if
+			}); //end of click function
+	});	
+	</script>

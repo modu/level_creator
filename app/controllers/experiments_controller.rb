@@ -32,12 +32,8 @@ class ExperimentsController < ApplicationController
     i = []
     @gameName = params[:gameName]
     @experimentName = params[:experimentName]
-    
     @sequenceNames = Experiment.where(gameName:@gameName,experimentName:@experimentName).to_a.first.sequences["sequence"].each{|b| i<<b.values} 
-    
-    i.delete_at(0)
     i = i.sort_by{rand}
-    #i.delete_at(0)
     seqOb = Sequence.all_of('sequenceName' => i[0][0]).first
     
     if seqOb!=nil

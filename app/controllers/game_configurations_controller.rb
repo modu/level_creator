@@ -17,6 +17,7 @@ class GameConfigurationsController < ApplicationController
   def createLevel
     query = GameConfiguration.all(:conditions => {:gameName => params["gameName"]})
     v = query.first
+    #binding.pry
     @ans1 = v[:nonRepeat]
     @ans2 = v[:repeat]
     @str0 = '<form method=post action=/createdLevel/'+params['gameName']+'>'
@@ -38,12 +39,14 @@ class GameConfigurationsController < ApplicationController
   
   def addToActiveGames
     storing = Active.new :gameName => params["AddGame"]
+    
     storing.save
     redirect_to "/all"
   end
   
   def all
     @games = GameConfiguration.find(:all).to_a.map {|x| x["gameName"]}
+    
   end
   
   def delete
