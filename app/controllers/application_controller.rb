@@ -65,7 +65,7 @@ class ApplicationController < ActionController::Base
            @ans1 << h
         else
            ary = e[:name].split('.')
-           binding.pry
+           
            st = ary[0]+'.'+ary[1]+'.'+ary[2]
            found = false
            @ans2.each do |b|
@@ -164,7 +164,7 @@ class ApplicationController < ActionController::Base
   def create_xml(hash, space)
      xml = ''
      hash.each do |k,v|
-        #binding.pry
+        # 
         if v.class == String
            xml << space + "<#{k}>#{v}</#{k}>\n"
         else

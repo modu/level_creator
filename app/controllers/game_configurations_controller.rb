@@ -2,9 +2,9 @@ require 'game_configurations_helper'
 include GameConfigurationsHelper
 class GameConfigurationsController < ApplicationController
   def created
-    binding.pry
+    
     o1 = store_parse(params)
-    binding.pry
+    
     converter(o1)    
     storing = GameConfiguration.new :gameName => o1[:gameName], :nonRepeat => @ans1, :repeat => @ans2
     storing.save
@@ -17,7 +17,7 @@ class GameConfigurationsController < ApplicationController
   def createLevel
     query = GameConfiguration.all(:conditions => {:gameName => params["gameName"]})
     v = query.first
-    #binding.pry
+     
     @ans1 = v[:nonRepeat]
     @ans2 = v[:repeat]
     @str0 = '<form method=post action=/createdLevel/'+params['gameName']+'>'
@@ -51,10 +51,19 @@ class GameConfigurationsController < ApplicationController
   
   def delete
     gameName = params[:gameName]
-    
     Active.where("gameName" => gameName).delete_all
     redirect_to '/showGames'
   end
   
+  def deleteCompletely
+     
+    @gameName = params[:delGameName]
+    GameConfiguration.where(gameName:@gameName).delete_all
+    Level.where(@gameName=>{"$exists"=>true}).delete_all
+    Sequence.where(gameName:@gameName).delete_all
+    Experiment.where(gameName:@gameName).delete_all
+    redirect_to "/all"
+    
+  end
   
 end

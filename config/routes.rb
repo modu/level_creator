@@ -1,37 +1,34 @@
 LevelCreator::Application.routes.draw do
-  match 'showGames',  :to => 'gameConfigurations#showGames',    :via => :get
-  match '/showLevel/:gameName', :to => 'levels#show',            :via => :get
-  match '/activeGames', :to => 'gameConfigurations#activeGames', :via => :get
-  match '/all',         :to => 'gameConfigurations#all', :via => :get
-  match '/addToActiveGames',    :to => 'gameConfigurations#addToActiveGames', :via => :post
-  match 'createGame', :to => 'gameConfigurations#createGame',   :via => :get
-  match 'created',    :to => 'gameConfigurations#created',      :via => :post
-  match 'createLevel/:gameName', :to => 'gameConfigurations#createLevel',  :via => :get
-  match 'createdLevel/:gameName', :to => 'Levels#created', :via => :post
-  match 'showLevel/:gameName/:levelName/xml', :to => 'Levels#xml', :via => :get
+  match 'showGames',                          :to => 'gameConfigurations#showGames',    :via => :get
+  match '/showLevel/:gameName',               :to => 'levels#show',                    :via => :get
+  match '/activeGames',                       :to => 'gameConfigurations#activeGames', :via => :get
+  match '/all',                               :to => 'gameConfigurations#all',          :via => :get
+  match '/addToActiveGames',                  :to => 'gameConfigurations#addToActiveGames', :via => :post
+  match 'createGame',                         :to => 'gameConfigurations#createGame',   :via => :get
+  match 'created',                            :to => 'gameConfigurations#created',      :via => :post
+  match 'createLevel/:gameName',              :to => 'gameConfigurations#createLevel',  :via => :get
+  match 'createdLevel/:gameName',             :to => 'Levels#created',                  :via => :post
+  match 'showLevel/:gameName/:levelName/xml', :to => 'Levels#xml',                      :via => :get
+  match '/deleteCompletely',                 :to => 'gameConfigurations#deleteCompletely',   :via => :post
   
-  match 'delete/:gameName',      :to => 'gameConfigurations#delete',       :via => :get
-  match 'showLevel/delete',     :to => 'levels#delete',             :via => :post
+  match 'delete/:gameName',                   :to => 'gameConfigurations#delete',       :via => :get
+  match 'showLevel/delete',                   :to => 'levels#delete',                   :via => :post
   
-  #match 'mathfact/sequences/index',         :to => 'sequences#index' ,       :via => :get
-  match ':gameName/sequences/create',        :to => 'sequences#create',       :via => :get  # show the form for creating sequences
-  match ':gameName/sequences/created',       :to => 'sequences#created',      :via => :post  # receives and creates new sequences
-  match ':gameName/sequences/show',          :to => 'sequences#show',         :via => :get   # show existing sequences
-  match ':gameName/sequences/update',          :to => 'sequences#update',      :via => :post   # receive and update sequences
-  match ':gameName/sequences/xml/:sequenceName',             :to => 'sequences#xml',          :via => :get   # show existing sequences
-  match ':gameName/sequences/delete',                     :to => 'sequences#delete',      :via => :post
-  match ':gameName/sequences/updated',                      :to => 'sequences#updated',     :via => :post
+  match ':gameName/sequences/create',         :to => 'sequences#create',                :via => :get  # show the form for creating sequences
+  match ':gameName/sequences/created',        :to => 'sequences#created',               :via => :post  # receives and creates new sequences
+  match ':gameName/sequences/show',           :to => 'sequences#show',                  :via => :get   # show existing sequences
+  match ':gameName/sequences/update',         :to => 'sequences#update',                :via => :post   # receive and update sequences
+  match ':gameName/sequences/xml/:sequenceName',       :to => 'sequences#xml',          :via => :get   # show existing sequences
+  match ':gameName/sequences/delete',         :to => 'sequences#delete',      :via => :post
+  match ':gameName/sequences/updated',        :to => 'sequences#updated',     :via => :post
 
-  #match 'mathfact/sequences/index',         :to => 'sequences#index' ,       :via => :get
   match ':gameName/experiments/create',        :to => 'experiments#create',       :via => :get  # show the form for creating experiments
   match ':gameName/experiments/created',       :to => 'experiments#created',      :via => :post  # receives and creates new experiments
   match ':gameName/experiments/show',          :to => 'experiments#show',         :via => :get   # show existing sequences
-  match ':gameName/experiments/update',          :to => 'experiments#update',      :via => :post   # receive and update sequences
+  match ':gameName/experiments/update',        :to => 'experiments#update',      :via => :post   # receive and update sequences
   match ':gameName/experiments/xml/:experimentName',             :to => 'experiments#xml',          :via => :get   # show existing experiments
-  match ':gameName/experiments/delete',                     :to => 'experiments#delete',      :via => :post
-  match ':gameName/experiments/updated',                      :to => 'experiments#updated',     :via => :post
-  
-  
+  match ':gameName/experiments/delete',        :to => 'experiments#delete',      :via => :post
+  match ':gameName/experiments/updated',       :to => 'experiments#updated',     :via => :post
   
   match ':gameName/experiments/:experimentName',            :to => 'experiments#ShowSequenceRandomXml', :via => :get
   

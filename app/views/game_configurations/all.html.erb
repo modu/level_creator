@@ -4,19 +4,69 @@
 	<title>all.html</title>
 	</head>
 <body>
-	<h1> All Games </h1>
+	<h1> List of all Games </h1>
+	</br>
 	<form method="post" action="addToActiveGames">
 	<%= label_TextField_helper "Enter Game Name ", "AddGame", "Enter Game Name to add to active"   %>
 	<input type="submit" id="submit"  value="Add" />
 	</form>
+	<form method="post" action="deleteCompletely" >
+		<%= label_TextField_helper 'Enter Game Name to delete,COMPLETELY', 'delGameName', 'Enter Game Name here ' %>
+	<input type="submit" id="Delete"  value="Delete" />
+	</form>
+	
 	
  	<% @games.each do |t|%>
-	<label style="color:blue"><%=t%> </label>
-	</br></br>
+	<a style="color:blue;font-size:17px;"><%=t%> </a>
+	</br>
 	<% end%>
-	
-	<a style="font-size:20px;"  href="/showGames">Back to Show Games  </a>
+	</br>	</br>
 	
 
 </body>
 </html>
+<script>
+$(document).ready(function(){
+    
+		$("#Delete").click(function(e){
+	
+			str = $.trim($("a").text()).split(" ");
+			var truth = 0;
+			if(str.length == 0){  alert("There are no Game");}
+			for(i=0;i<str.length;i=i+1){
+				if(str[i]!== $("#delGameName").val() ){
+					truth = truth +1;
+				}//end of if
+					
+			}//end of for
+			if(truth==str.length)
+			{
+				alert("Game Name not correct");
+				$("#delGameName").attr("value","");
+				e.preventDefault();
+				return false;
+			}//end of if
+			
+		}); //end of click function for Delete
+		
+		$("#submit").click(function(e){
+	
+			str = $.trim($("a").text()).split(" ");
+			var truth = 0;
+			if(str.length == 0){  alert("There are no Game");}
+			for(i=0;i<str.length;i=i+1){
+				if(str[i]!== $("#AddGame").val() ){
+					truth = truth +1;
+				}//end of if
+					
+			}//end of for
+			if(truth==str.length)
+			{
+				alert("Game Name not correct");
+				$("#AddGame").attr("value","");
+				e.preventDefault();
+				return false;
+			}//end of if
+			
+		}); //end of click function for Delete
+</script>

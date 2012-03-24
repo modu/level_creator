@@ -7,7 +7,7 @@ class ExperimentsController < ApplicationController
 
   def created
     ob = store_experiment params
-    binding.pry
+    
     Experiment.create ob    
     redirect_to "/showGames"
   end
@@ -20,7 +20,7 @@ class ExperimentsController < ApplicationController
     obj['experimentName'] = expOb['experimentName']
     out = create_xml(obj, '')
     r = "<hash>"+out+"</hash>\n"
-    #binding.pry
+     
     render :xml => r
   end
   #rabel
@@ -30,18 +30,17 @@ class ExperimentsController < ApplicationController
   end
   
   def ShowSequenceRandomXml
-    i = []
+    
+    @i = []
     @gameName = params[:gameName]
     @experimentName = params[:experimentName]
-    @sequenceNames = Experiment.where(gameName:@gameName,experimentName:@experimentName).to_a.first.sequences["sequence"].each{|b| i<<b.values} 
-    i = i.sort_by{rand}
-    seqOb = Sequence.all_of('sequenceName' => i[0][0]).first
-    
+    @sequenceNames = Experiment.where(gameName:@gameName,experimentName:@experimentName).to_a.first.sequences["sequence"].sort_by{rand} 
+    seqOb = Sequence.all_of('sequenceName' => @sequenceNames[0]).first
     if seqOb!=nil
       render :xml => seqOb
     end
     
-    #binding.pry
+     
   end
   
   def delete
@@ -71,7 +70,7 @@ class ExperimentsController < ApplicationController
     @gameName = params[:gameName]
     @experimentName = params[:oldExperimentName]
     ob = store_experiment params
-    binding.pry
+    
     t = Experiment.where(gameName:@gameName,experimentName:@experimentName).update_all(ob)
       if t==0
         return false

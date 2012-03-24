@@ -34,7 +34,7 @@ class SequencesController < ApplicationController
     t = Experiment.where(gameName:@gameName,"sequences.sequence" => @SequenceName).to_a.map {|x| @i<<x["experimentName"]}    
     if t.empty?
       @t = Sequence.where(gameName:@gameName,sequenceName:@SequenceName).delete_all
-      binding.pry
+       
       render 'delete'
       return
     end
@@ -50,14 +50,14 @@ class SequencesController < ApplicationController
     t[0].each do |x|
       @i << x
     end
-    binding.pry
+     
   end
   
   def updated
     @gameName = params[:gameName]
     @sequenceName = params[:oldSequenceName]
     ob = store_sequence params
-    binding.pry
+     
     Sequence.where(gameName:@gameName,sequenceName:@sequenceName).update_all(ob)
     
     
